@@ -1,0 +1,43 @@
+.headerContainer {
+    background-color: #2155ca;
+    color: #ffffff;
+    height: 4rem;
+    padding: 2rem 4rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+        width: 8rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+
+        &:hover {
+            background-color: #ffffff;
+            filter: brightness(0.8);
+        }
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        img {
+            width: 2rem;
+            background-color: #396eeb;
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        p {
+            width: 100%rem;
+            font-size: 0.8rem;
+        }
+    }
+}

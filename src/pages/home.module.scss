@@ -1,0 +1,96 @@
+.container {
+    background-color: aliceblue;
+    color: white;
+
+    .main {
+        padding: 2.5rem;
+
+        .companyContainer {
+            display: flex;
+            padding: 1rem;
+            background-color: #396eeb;
+            border-radius: 0.25rem;
+
+            img {
+                width: 4rem;
+                margin: 0 2rem;
+                padding-right: 2rem;
+                border-right: 1px solid black;
+            }
+
+            h1 {
+                color: white;
+                margin-left: 2rem;
+            }
+        }
+
+        .unitsContainer {
+            h2 {
+                padding: 1rem;
+            }
+            ul {
+                display: flex;
+                li {
+                    border: 1px solid black;
+                    border-radius: 0.5rem;
+                    margin: 1rem;
+                    padding: 1rem 2rem;
+
+                    background-color: #396febb4;
+
+                    .unitHead {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 0.5rem;
+                        margin-bottom: 0.25rem;
+
+                        img {
+                            width: 2.5rem;
+                        }
+
+                        h3 {
+                            font-weight: 900;
+                            color: white;
+                        }
+                    }
+
+                    p {
+                        color: rgb(20, 19, 19);
+                    }
+
+                    h4 {
+                        color: white;
+                        font-weight: 600;
+                        margin: 0.25rem 0 1rem 2rem
+                    }
+
+                    .arroyImg {
+                        display: flex;
+                        justify-content: flex-end;
+
+                        img {
+                            width: 2.5rem;
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+
+    .footer {
+        background-color: #2155ca;
+        color: white;
+        display: flex;
+        padding: 1rem;
+        color: black;
+        justify-content: center;
+        
+        img {
+            width: 10px;
+            margin-right: 5px;
+        }
+    }
+}
