@@ -19,39 +19,63 @@ type Asset = {
     unitId: number;
 }
 
+type Unit = {
+    id: number;
+    name: string;
+    companyId: number;
+  }
 
 type UnitProps = {
     assets: Asset[];
+    units : Unit[];
     slug;
 } 
 
-export default function Unit({assets, slug }: UnitProps) {
+export default function Unit({ assets, slug, units }: UnitProps) {
 
-    const filteredAssets = assets.filter((asset) => asset.unitId === parseFloat(slug))
+    const filteredAssets = assets.filter((asset) => asset.unitId === parseFloat(slug));
+
+    const currentUnit = units.find((unit) => unit.id === parseFloat(slug));
 
     return (
         <div className={styles.episodes}>
 
             <Head>
-                <title> | TRACTIAN</title>
+                <title>{currentUnit.name} | TRACTIAN</title>
             </Head>
 
-            <ul>
-                {filteredAssets.map((asset) => {
-                    return(
-                        <li>
-                            <p>{asset.id}</p>
-                            <p>{asset.healthscore}</p>
-                            <p>{asset.image}</p>
-                            <p>{asset.model}</p>
-                            <p>{asset.name}</p>
-                            <p>{asset.sensors}</p>
-                            <p>{asset.status}</p>
-                        </li>
-                    )
-                })}
-            </ul>
-            
+            <h1>{currentUnit.name}</h1>
+
+            <section className={styles.allAssets}>
+                <h2>Todos Ativos:</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nome</th>
+                            <th>Modelo</th>
+                            <th>Sensores</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {filteredAssets.map((asset) => {
+                            return (
+                                <tr>
+                                    <td>
+                                        <img style={{ width: 30}} src={asset.image} alt={asset.name} />
+                                    </td>
+                                    <td>{asset.name}</td>
+                                    <td>{asset.model}</td>
+                                    <td>{asset.sensors}</td>
+                                    <td>{asset.status}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </section>
         </div>
     )
 }
@@ -85,6 +109,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       props: {
         assets: data.assets,
         slug: data.slug,
+        units: data.units,
       }
     }
 }
