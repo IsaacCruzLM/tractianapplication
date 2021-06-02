@@ -1,6 +1,8 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
 import styles from './home.module.scss'
 
 type Unit = {
@@ -40,7 +42,7 @@ export default function Home({ units, companies }: HomeProps) {
         <section className={styles.unitsContainer}>
           <h2>Todas as Unidades:</h2>
           <ul>
-            {units.map((unit, index) => {
+            {units.map((unit) => {
               return (
                 <li key={unit.id}>
                   <div className={styles.unitHead}>
@@ -56,7 +58,9 @@ export default function Home({ units, companies }: HomeProps) {
                   {/* Atualizar dinamicamente a ultima atualização - puxar assets da api e ordernar */}
                   <h4>XX/XX/XX - 12:12:12</h4>
                   <div className={styles.arroyImg}>
-                    <img src="arrow-alt-circle-right-solid.svg" alt="Verificar Unidade" />
+                    <Link href={`/units/${unit.id}`} >
+                      <img src="arrow-alt-circle-right-solid.svg" alt="Verificar Unidade" />
+                    </Link>
                   </div>
                 </li>
               )
