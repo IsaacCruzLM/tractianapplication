@@ -1,10 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { format, parseISO } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
 import styles from './units.module.scss';
-import Image from 'next/image';
-import Link from 'next/link';
 import Head from 'next/head';
+
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
 
 type Asset = {
     id: number;
@@ -33,9 +32,65 @@ type UnitProps = {
 
 export default function Unit({ assets, slug, units }: UnitProps) {
 
+    // Filtra objs da API da unidade atual
     const filteredAssets = assets.filter((asset) => asset.unitId === parseFloat(slug));
 
+    // Pega unidade atual
     const currentUnit = units.find((unit) => unit.id === parseFloat(slug));
+
+    // Gera dados para gráfico de saúde
+    const dataGenerator = () => {
+        const dataArray = filteredAssets.map((asset) => {
+            return (
+                {
+                    name: asset.name,
+                    color: '#396eeb',
+                    y: asset.healthscore,
+                    drilldown: asset.id
+                }
+            )
+        })
+        return dataArray;
+    }
+
+    const options = {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Pontuações de Saúde'
+        },
+        xAxis: {
+            title: {
+                text: 'Unidades'
+            },
+            type: 'category'
+        },
+        yAxis: {
+            title: {
+                text: '% de Saúde'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.1f}%'
+                }
+            }
+        },
+        series: [
+            {
+                name: 'Assets',
+                colorByPoint: true,
+                data: dataGenerator()
+            }
+        ]
+    }
 
     return (
         <div className={styles.episodes}>
@@ -76,6 +131,10 @@ export default function Unit({ assets, slug, units }: UnitProps) {
                     </tbody>
                 </table>
             </section>
+
+            <section className={styles.graphic}>
+                <HighchartsReact highcharts={Highcharts} options={options} />
+            </section>
         </div>
     )
 }
@@ -113,3 +172,4 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       }
     }
 }
+

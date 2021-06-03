@@ -1,0 +1,24 @@
+// Gera array de dados para o Drilldown
+    const arrayDrilldownGenetator = (obj) => {
+        const dataArray = [];
+        const specificationsNames = Object.keys(obj);
+        const specificationsValues = Object.values(obj);
+        specificationsNames.map((name, index) => {
+            return dataArray.push([name, specificationsValues[index]]);
+        })
+        return dataArray;
+    }
+
+    // Gera dados do drilldown para gráficos de saúde
+    const dataDrilldownGenerator = () => {
+        const dataDrilldownArray = filteredAssets.map((asset) => {
+            return (
+                {
+                    name: asset.name,
+                    id: asset.id,
+                    data: (arrayDrilldownGenetator(asset.specifications))
+                }
+            )
+        })
+        return dataDrilldownArray;
+    }
