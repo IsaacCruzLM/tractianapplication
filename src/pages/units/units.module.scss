@@ -1,0 +1,125 @@
+.mainContent {
+    padding: 2rem;
+
+    .unitHead {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+
+        img {
+            width: 40px;
+            margin-right: 1rem;
+        }
+    }
+
+    .allAssets {
+        margin-bottom: 3rem;
+        h2 {
+            margin-bottom: 0.8rem;
+        }
+
+        table {
+            width: 100%;
+            color: black;
+
+            th,
+            td {
+                padding: 1rem 0.5rem;
+                border-bottom: 1px solid rgb(204, 198, 198);
+                text-align: center;
+            }
+
+            th {
+                font-weight: 800;
+            }
+
+            td {
+                img {
+                    width: 6rem;
+                    height: 6rem;
+                }
+
+                select {
+                    border: 1px solid rgb(204, 198, 198);
+                    background-color: transparent;
+                    height: 2rem;
+                    text-align: center;
+                }
+
+                .statusIcon {
+                    width: 1rem;
+                    padding: 0;
+                }
+            }
+
+            .statusColumn {
+                width: 0.5rem;
+            }
+        }
+    }
+
+    .healthGraphic {
+        width: 100%;
+        margin: 2rem 0;
+    }
+
+    .specificationsGraphic {
+        width: 100%;
+        margin: 2rem 0 0 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .graphicButtons {
+            margin: 1rem;
+
+            button {
+                margin: none;
+                background-color: transparent;
+                color: black;
+
+                height: 2.5rem;
+                width: 13rem;
+                padding: 0.25rem;
+                margin: 0.5rem 1rem;
+                border-radius: 0.25rem;
+
+                &:hover {
+                    filter: brightness(0.95);
+                    background-color: #396eeb;
+                    color: white;
+                    font-weight: 700;
+                }
+            }
+            
+        }
+    }
+
+    .allUpdates{
+        margin-top: 3rem;
+
+        h2 {
+            margin-bottom: 0.8rem;
+        }
+
+        table {
+            width: 100%;
+            color: black;
+
+            th,
+            td {
+                padding: 1rem 0.4rem;
+                border-bottom: 1px solid rgb(204, 198, 198);
+                text-align: center;
+            }
+
+            th {
+                font-weight: 800;
+            }
+
+        }
+    }
+}
+
+

@@ -58,6 +58,13 @@ export default function Unit({ assets, slug, units, users }: UnitProps) {
         return format(parseISO(asset.metrics['lastUptimeAt']), "dd MMMM yyyy', às ' HH:mm'h'", {locale: ptBR})
     })
 
+    // Icon Generator
+    const iconGenerator = (string) => {
+        if (string === 'inAlert') { return <img className={styles.statusIcon} src="/asset-inAlert.svg" alt="Em Alerta" />}
+        if (string === 'inDowntime') { return <img className={styles.statusIcon} src="/asset-inDownTime.svg" alt="Em Parada" />}
+        if (string === 'inOperation') { return <img className={styles.statusIcon} src="/asset-inOperation.svg" alt="Em Operação" />}
+    }
+
     // Gera dados para gráfico de saúde
     const dataGenerator = () => {
         const dataArray = filteredAssets.map((asset) => {
@@ -78,17 +85,33 @@ export default function Unit({ assets, slug, units, users }: UnitProps) {
             type: 'column'
         },
         title: {
-            text: 'Pontuações de Saúde'
+            text: 'Pontuações de Saúde',
+            style: {
+                fontWeight: 600,
+            }
         },
         xAxis: {
-            title: {
-                text: 'Unidades'
-            },
-            type: 'category'
+            type: 'category',
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize: '15px'
+                }
+            }
         },
         yAxis: {
             title: {
-                text: '% de Saúde'
+                text: '% de Saúde',
+                style: {
+                    color: 'black',
+                    fontSize: '20px'
+                }
+            },
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize: '10px'
+                }
             }
         },
         legend: {
@@ -130,19 +153,38 @@ export default function Unit({ assets, slug, units, users }: UnitProps) {
     }
 
     // Options do gráfico de especificação para RPM
-    const specficationRPM = {
+    const specificationRPM = {
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Especificações de RPM'
+            text: 'Especificações de RPM',
+            style: {
+                fontWeight: 600,
+            }
         },
         xAxis: {
-            type: 'category'
+            type: 'category',
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize: '15px'
+                }
+            }
         },
         yAxis: {
             title: {
-                text: 'Rotações por Minuto'
+                text: 'Rotações por Minuto',
+                style: {
+                    color: 'black',
+                    fontSize: '20px'
+                }
+            },
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize: '10px'
+                }
             }
         },
         legend: {
@@ -182,19 +224,38 @@ export default function Unit({ assets, slug, units, users }: UnitProps) {
     }
 
      // Options do gráfico de especificação para Potência
-    const specficationPower = {
+    const specificationPower = {
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Especificações de Potência'
+            text: 'Especificações de Potência',
+            style: {
+                fontWeight: 600,
+            }
         },
         xAxis: {
-            type: 'category'
+            type: 'category',
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize: '15px'
+                }
+            }
         },
         yAxis: {
             title: {
-                text: 'Potência em kWh'
+                text: 'Potência em kWh',
+                style: {
+                    color: 'black',
+                    fontSize: '20px'
+                }
+            },
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize: '10px'
+                }
             }
         },
         legend: {
@@ -234,19 +295,38 @@ export default function Unit({ assets, slug, units, users }: UnitProps) {
     }
     
      // Options do gráfico de especificação para Temperatura
-    const specficationTemp = {
+    const specificationTemp = {
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Especificações de Temperatura'
+            text: 'Especificações de Temperatura',
+            style: {
+                fontWeight: 600,
+            }
         },
         xAxis: {
-            type: 'category'
+            type: 'category',
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize: '15px'
+                }
+            }
         },
         yAxis: {
             title: {
-                text: 'Temperatura Máxima em Celsius'
+                text: 'Temperatura Máxima em Celsius',
+                style: {
+                    color: 'black',
+                    fontSize: '20px'
+                }
+            },
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize: '10px'
+                }
             }
         },
         legend: {
@@ -269,16 +349,19 @@ export default function Unit({ assets, slug, units, users }: UnitProps) {
         ]
     }
 
-    const [specification, setSpecification] = useState(specficationRPM);
+    const [specification, setSpecification] = useState(specificationRPM);
 
     return (
-        <div className={styles.episodes}>
+        <div className={styles.mainContent}>
 
             <Head>
                 <title>{currentUnit.name} | TRACTIAN</title>
             </Head>
 
-            <h1>{currentUnit.name}</h1>
+            <div className={styles.unitHead}>
+                <img src="/cogs-solid.svg" alt="unit"/>
+                <h1>{currentUnit.name}</h1>
+            </div>
 
             <section className={styles.allAssets}>
                 <h2>Todos Ativos:</h2>
@@ -291,6 +374,7 @@ export default function Unit({ assets, slug, units, users }: UnitProps) {
                             <th>Sensores</th>
                             <th>Responsável</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                     </thead>
 
@@ -299,18 +383,19 @@ export default function Unit({ assets, slug, units, users }: UnitProps) {
                             return (
                                 <tr>
                                     <td>
-                                        <img style={{ width: 30}} src={asset.image} alt={asset.name} />
+                                        <img  src={asset.image} alt={asset.name} />
                                     </td>
                                     <td>{asset.name}</td>
                                     <td>{asset.model}</td>
                                     <td>{asset.sensors}</td>
                                     <td>
                                         <select name="" id="">
-                                            <option value={0}>Selecionae Responsável</option>
+                                            <option value={0}>Selecionar Responsável</option>
                                             {filteredUsers.map((user) => <option value={user.id}>{user.name}</option> )}
                                         </select>
                                     </td>
-                                    <td>{asset.status}</td>
+                                    <td className={styles.statusColumn}>{asset.status}</td>
+                                    <td>{iconGenerator(asset.status)}</td>
                                 </tr>
                             )
                         })}
@@ -323,23 +408,25 @@ export default function Unit({ assets, slug, units, users }: UnitProps) {
             </section>
 
             <section className={styles.specificationsGraphic}>
-                <button onClick={() => setSpecification( specficationRPM )}>Rotações Por Minuto</button>
-                <button onClick={() => setSpecification( specficationPower )}>Potência</button>
-                <button onClick={() => setSpecification( specficationTemp )}>Temperatura</button>
-                <div id="grafico">
-                    <HighchartsReact highcharts={Highcharts} options={specification} />
+                <h4>Selecione a propiedade</h4>
+                <div className={styles.graphicButtons}>
+                    <button onClick={() => setSpecification( specificationRPM )}>Rotações Por Minuto</button>
+                    <button onClick={() => setSpecification( specificationPower )}>Potência</button>
+                    <button onClick={() => setSpecification( specificationTemp )}>Temperatura</button>
                 </div>
             </section>
-
+            <div id="graphic">
+                    <HighchartsReact highcharts={Highcharts} options={specification} />
+            </div>
             <section className={styles.allUpdates}>
                 <h2>Ultimas Atualizações:</h2>
                 <table>
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Total de Coletas Uptime(Ligada)</th>
-                            <th>Total de Horas de Coletas Uptime(Ligada)</th>
-                            <th>Data da Ultima Coleta Uptime(Ligada)</th>
+                            <th>Total de Coletas Uptime</th>
+                            <th>Total de Horas de Coletas Uptime</th>
+                            <th>Data da Ultima Coleta Uptime</th>
                         </tr>
                     </thead>
 
@@ -356,6 +443,7 @@ export default function Unit({ assets, slug, units, users }: UnitProps) {
                         })}
                     </tbody>
                 </table>
+                <span>*Uptime - Ligada</span>
             </section>
 
         </div>
