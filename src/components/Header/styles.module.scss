@@ -1,6 +1,6 @@
 .headerContainer {
-    background-color: #2155ca;
-    color: #ffffff;
+    background-color: var(--blue-dark);
+    color: var(--white);
     height: 4rem;
     padding: 2rem 4rem;
 
@@ -14,7 +14,7 @@
         border-radius: 0.5rem;
 
         &:hover {
-            background-color: #ffffff;
+            background-color: var(--white);
             filter: brightness(0.8);
         }
     }
@@ -30,13 +30,12 @@
         
         img {
             width: 2rem;
-            background-color: #396eeb;
+            background-color: var(--blue-medium);
             padding: 5px;
             border-radius: 50%;
         }
 
         p {
-            width: 100%rem;
             font-size: 0.8rem;
         }
     }

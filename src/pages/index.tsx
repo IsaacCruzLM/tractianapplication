@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
 import styles from './home.module.scss'
 
 type Unit = {
@@ -20,6 +21,7 @@ type HomeProps = {
 }
 
 export default function Home({ units, companies }: HomeProps) {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -40,7 +42,7 @@ export default function Home({ units, companies }: HomeProps) {
         <section className={styles.unitsContainer}>
           <h2>Todas as Unidades:</h2>
           <ul>
-            {units.map((unit, index) => {
+            {units.map((unit) => {
               return (
                 <li key={unit.id}>
                   <div className={styles.unitHead}>
@@ -52,11 +54,10 @@ export default function Home({ units, companies }: HomeProps) {
                   <p>Nome da Empresa:</p>
                   {/* Pegar Dinamicamente o nome da empresas com o unityID */}
                   <h4>{companies[0].name}</h4>
-                  <p>Última Atualização:</p>
-                  {/* Atualizar dinamicamente a ultima atualização - puxar assets da api e ordernar */}
-                  <h4>XX/XX/XX - 12:12:12</h4>
                   <div className={styles.arroyImg}>
-                    <img src="arrow-alt-circle-right-solid.svg" alt="Verificar Unidade" />
+                    <Link href={`/units/${unit.id}`} >
+                      <img src="arrow-alt-circle-right-solid.svg" alt="Verificar Unidade" />
+                    </Link>
                   </div>
                 </li>
               )
@@ -64,11 +65,6 @@ export default function Home({ units, companies }: HomeProps) {
           </ul>
         </section>
       </main>
-
-      <footer className={styles.footer}>
-        <img src="/copyright-regular.svg" alt="copyright" />
-        <p> - Copyright, 2021 - Isaac Cruz</p>
-      </footer>
     </div>
   )
 }
@@ -80,7 +76,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       units: data.units,
-      companies: data.companies
+      companies: data.companies,
     }
   }
 }
