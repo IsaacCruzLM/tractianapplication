@@ -6,6 +6,9 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useState } from 'react';
 
+import { format, parseISO } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
+
 
 type Asset = {
     id: number;
@@ -39,6 +42,11 @@ export default function Unit({ assets, slug, units }: UnitProps) {
 
     // Pega unidade atual
     const currentUnit = units.find((unit) => unit.id === parseFloat(slug));
+
+    // Formata datas de última atualização
+    const arrarOfFormatedDates = filteredAssets.map((asset) => {
+        return format(parseISO(asset.metrics['lastUptimeAt']), "dd MMMM yyyy', às ' HH:mm'h'", {locale: ptBR})
+    })
 
     // Gera dados para gráfico de saúde
     const dataGenerator = () => {
@@ -307,7 +315,7 @@ export default function Unit({ assets, slug, units }: UnitProps) {
             </section>
 
             <section className={styles.allUpdates}>
-                <h2>Todos Ativos:</h2>
+                <h2>Ultimas Atualizações:</h2>
                 <table>
                     <thead>
                         <tr>
@@ -319,13 +327,13 @@ export default function Unit({ assets, slug, units }: UnitProps) {
                     </thead>
 
                     <tbody>
-                        {filteredAssets.map((asset) => {
+                        {filteredAssets.map((asset, index) => {
                             return (
                                 <tr>
                                     <td>{asset.name}</td>
                                     <td>{asset.metrics['totalCollectsUptime']}</td>
-                                    <td>{asset.metrics['totalUptime']}</td>
-                                    <td>{asset.metrics['lastUptimeAt']}</td>
+                                    <td>{asset.metrics['totalUptime'].toFixed(2)}</td>
+                                    <td>{arrarOfFormatedDates[index]}</td>
                                 </tr>
                             )
                         })}
