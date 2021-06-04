@@ -27,18 +27,28 @@ type Unit = {
     id: number;
     name: string;
     companyId: number;
-  }
+}
+
+type User = {
+    id: number;
+    name: string;
+    unitId: number;
+}
 
 type UnitProps = {
     assets: Asset[];
     units : Unit[];
+    users: User[];
     slug;
 } 
 
-export default function Unit({ assets, slug, units }: UnitProps) {
+export default function Unit({ assets, slug, units, users }: UnitProps) {
 
     // Filtra objs da API da unidade atual
     const filteredAssets = assets.filter((asset) => asset.unitId === parseFloat(slug));
+
+    // Filtra users da unidade
+    const filteredUsers = users.filter((user) => user.unitId === parseFloat(slug));
 
     // Pega unidade atual
     const currentUnit = units.find((unit) => unit.id === parseFloat(slug));
@@ -279,6 +289,7 @@ export default function Unit({ assets, slug, units }: UnitProps) {
                             <th>Nome</th>
                             <th>Modelo</th>
                             <th>Sensores</th>
+                            <th>Responsável</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -293,6 +304,12 @@ export default function Unit({ assets, slug, units }: UnitProps) {
                                     <td>{asset.name}</td>
                                     <td>{asset.model}</td>
                                     <td>{asset.sensors}</td>
+                                    <td>
+                                        <select name="" id="">
+                                            <option value={0}>Selecionae Responsável</option>
+                                            {filteredUsers.map((user) => <option value={user.id}>{user.name}</option> )}
+                                        </select>
+                                    </td>
                                     <td>{asset.status}</td>
                                 </tr>
                             )
@@ -375,6 +392,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         assets: data.assets,
         slug: data.slug,
         units: data.units,
+        users: data.users,
       }
     }
 }
