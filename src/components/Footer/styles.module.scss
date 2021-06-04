@@ -1,9 +1,8 @@
 .footer {
-    background-color: #2155ca;
-    color: white;
+    background-color: var(--blue-dark);
     display: flex;
     padding: 1rem;
-    color: black;
+    color: var(--white);
     justify-content: center;
     
     img {

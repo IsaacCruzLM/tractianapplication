@@ -1,5 +1,7 @@
 import format from 'date-fns/format';
 import ptBR from 'date-fns/locale/pt-BR';
+import Link from 'next/link';
+import React from 'react';
 
 import styles from './styles.module.scss';
 
@@ -10,8 +12,9 @@ export function Header () {
     return (
 
         <header className={styles.headerContainer}>
-            <img src="/logo.svg" alt="TRACTIAN"/>
-
+            <Link href={`http://localhost:3000/`} >
+                <img src="/logo.svg" alt="TRACTIAN"/>
+            </Link>
             <p>Monitoramento de máquinas <strong>Tractian</strong></p>
 
             <span>{currentDate}</span>

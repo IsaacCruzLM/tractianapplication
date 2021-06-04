@@ -21,6 +21,7 @@ type HomeProps = {
 }
 
 export default function Home({ units, companies }: HomeProps) {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -53,9 +54,6 @@ export default function Home({ units, companies }: HomeProps) {
                   <p>Nome da Empresa:</p>
                   {/* Pegar Dinamicamente o nome da empresas com o unityID */}
                   <h4>{companies[0].name}</h4>
-                  <p>Última Atualização:</p>
-                  {/* Atualizar dinamicamente a ultima atualização - puxar assets da api e ordernar */}
-                  <h4>XX/XX/XX - 12:12:12</h4>
                   <div className={styles.arroyImg}>
                     <Link href={`/units/${unit.id}`} >
                       <img src="arrow-alt-circle-right-solid.svg" alt="Verificar Unidade" />
@@ -78,7 +76,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       units: data.units,
-      companies: data.companies
+      companies: data.companies,
     }
   }
 }

@@ -20,12 +20,12 @@
 
         table {
             width: 100%;
-            color: black;
+            color: var(--black);
 
             th,
             td {
                 padding: 1rem 0.5rem;
-                border-bottom: 1px solid rgb(204, 198, 198);
+                border-bottom: 1px solid var(--gray-200);
                 text-align: center;
             }
 
@@ -40,7 +40,7 @@
                 }
 
                 select {
-                    border: 1px solid rgb(204, 198, 198);
+                    border: 1px solid var(--gray-200);
                     background-color: transparent;
                     height: 2rem;
                     text-align: center;
@@ -77,7 +77,7 @@
             button {
                 margin: none;
                 background-color: transparent;
-                color: black;
+                color: var(--black);
 
                 height: 2.5rem;
                 width: 13rem;
@@ -87,7 +87,7 @@
 
                 &:hover {
                     filter: brightness(0.95);
-                    background-color: #396eeb;
+                    background-color: var(--blue-medium);
                     color: white;
                     font-weight: 700;
                 }
@@ -105,12 +105,12 @@
 
         table {
             width: 100%;
-            color: black;
+            color: var(--black);
 
             th,
             td {
                 padding: 1rem 0.4rem;
-                border-bottom: 1px solid rgb(204, 198, 198);
+                border-bottom: 1px solid var(--gray-200);
                 text-align: center;
             }
 
