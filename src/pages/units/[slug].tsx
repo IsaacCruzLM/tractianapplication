@@ -353,7 +353,6 @@ export default function Unit({ assets, slug, units, users }: UnitProps) {
 
     return (
         <div className={styles.mainContent}>
-
             <Head>
                 <title>{currentUnit.name} | TRACTIAN</title>
                 <link rel="icon" href="/favicon-traction.ico" />
