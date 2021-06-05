@@ -12,7 +12,7 @@ export function Header () {
     return (
 
         <header className={styles.headerContainer}>
-            <Link href={`http://localhost:3000/`} >
+            <Link href={`/`} >
                 <img src="/logo.svg" alt="TRACTIAN"/>
             </Link>
             <p>Monitoramento de máquinas <strong>Tractian</strong></p>
